@@ -1,0 +1,38 @@
+testing1
+
+Build BitMap: 0.013674867 sec
+Build Tree:
+        level 1:0.06039647 sec
+        level 2:0.314626569 sec
+        level 3:0.396806571 sec
+        level 4:0.44677664 sec
+        level 5:1.089998829 sec
+        level 6:2.564515888 sec
+        level 7:5.027512909 sec
+        level 8:8.080385621 sec
+        level 9:10.818396455 sec
+        level 10:11.904973089 sec
+        level 11:10.882084491 sec
+        level 12:8.282462217 sec
+        level 13:5.138043799 sec
+        level 14:2.563315669 sec
+        level 15:1.075218852 sec
+        level 16:0.336877623 sec
+        level 17:0.079802587 sec
+        level 18:0.013857007 sec
+        level 19:0.001612396 sec
+        level 20:1.93122E-4 sec
+Build Tree Total: 69.083666761 sec
+finished.
+
+
+Before:
+Mem:       2055332    1484456     570876          0     140388     606360
+-/+ buffers/cache:     737708    1317624
+Swap:      6016300       7096    6009204
+After:
+             total       used       free     shared    buffers     cached
+Mem:       2055332    1593520     461812          0     140588     681912
+-/+ buffers/cache:     771020    1284312
+Swap:      6016300       7096    6009204
+

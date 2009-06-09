@@ -1,0 +1,44 @@
+---------------1бу16---------------
+cdd+db(diff): 26478
+One round takes: 441.688 seconds.
+---------------3бу18---------------
+cdd+db(diff): 24592
+One round takes: 403.353 seconds.
+---------------5бу20---------------
+cdd+db(diff): 27257
+One round takes: 471.786 seconds.
+---------------7бу22---------------
+cdd+db(diff): 30142
+One round takes: 529.752 seconds.
+---------------9бу24---------------
+cdd+db(diff): 27908
+One round takes: 480.667 seconds.
+---------------11бу26---------------
+cdd+db(diff): 30806
+One round takes: 523.977 seconds.
+---------------13бу28---------------
+cdd+db(diff): 33282
+One round takes: 569.664 seconds.
+---------------15бу30---------------
+cdd+db(diff): 35147
+One round takes: 611.448 seconds.
+---------------17бу32---------------
+cdd+db(diff): 28403
+One round takes: 482.511 seconds.
+---------------19бу34---------------
+cdd+db(diff): 29656
+One round takes: 503.053 seconds.
+---------------21бу36---------------
+cdd+db(diff): 24513
+One round takes: 398.362 seconds.
+---------------23бу38---------------
+cdd+db(diff): 23697
+One round takes: 380.836 seconds.
+---------------25бу40---------------
+cdd+db(diff): 28002
+One round takes: 462.320 seconds.
+---------------------------------------------------------
+Final GSP's time and memory info--------------------------
+
+total_time: 6259.417 seconds.
+biggest memory: 35362

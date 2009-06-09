@@ -1,0 +1,60 @@
+---------------1бу6---------------
+cdd+db(diff): 36453
+One round takes: 0.485 seconds.
+---------------3бу8---------------
+cdd+db(diff): 20833
+One round takes: 1.337 seconds.
+---------------5бу10---------------
+cdd+db(diff): 31697
+One round takes: 1.561 seconds.
+---------------7бу12---------------
+cdd+db(diff): 57194
+One round takes: 4.714 seconds.
+---------------9бу14---------------
+cdd+db(diff): 28412
+One round takes: 1.951 seconds.
+---------------11бу16---------------
+cdd+db(diff): 23594
+One round takes: 1.530 seconds.
+---------------13бу18---------------
+cdd+db(diff): 25803
+One round takes: 1.884 seconds.
+---------------15бу20---------------
+cdd+db(diff): 24269
+One round takes: 1.281 seconds.
+---------------17бу22---------------
+cdd+db(diff): 20767
+One round takes: 1.635 seconds.
+---------------19бу24---------------
+cdd+db(diff): 21960
+One round takes: 1.257 seconds.
+---------------21бу26---------------
+cdd+db(diff): 46666
+One round takes: 2.200 seconds.
+---------------23бу28---------------
+cdd+db(diff): 28076
+One round takes: 2.143 seconds.
+---------------25бу30---------------
+cdd+db(diff): 24739
+One round takes: 1.271 seconds.
+---------------27бу32---------------
+cdd+db(diff): 41120
+One round takes: 2.823 seconds.
+---------------29бу34---------------
+cdd+db(diff): 24569
+One round takes: 1.956 seconds.
+---------------31бу36---------------
+cdd+db(diff): 12492
+One round takes: 0.958 seconds.
+---------------33бу38---------------
+cdd+db(diff): 13773
+One round takes: 0.885 seconds.
+--------------- final round ---------------
+One round takes: 0.988 seconds.
+---------------------------------------------------------
+Final Pisa_F's time and memory info----------------------
+
+total_time: 30.859 seconds.
+biggest memory: 57194
+biggest datebase: 28348
+biggest candidate: 28846

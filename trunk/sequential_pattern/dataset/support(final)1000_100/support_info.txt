@@ -1,0 +1,8 @@
+support : 0.05 0.04 0.03 0.02 0.01 0.004 0.002
+
+gen.exe seq -ncust 1000 -slen 12 -tlen 1.05 -nitems 1 -seq.npats 100 -seq.patlen 2.2 -ascii
+
+PSP-------------
+
+
+GSP-------------

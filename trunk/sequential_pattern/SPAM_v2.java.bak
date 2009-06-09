@@ -1,0 +1,384 @@
+import java.io.* ;
+import java.util.* ;
+import java.lang.Math ;
+import jdsl.core.algo.traversals.*;
+import jdsl.core.api.*;
+import jdsl.core.ref.*;
+
+public class SPAM_v2{
+	private Tree tree = new NodeTree();
+
+	private int powk ;
+	private int cluster ;
+	private int maxTransSize ;
+	private int T ;
+	private Hashtable hash = new Hashtable() ;
+	private Hashtable hash_value = new Hashtable() ;
+	private Hashtable hash_pos = new Hashtable() ;
+	List<String> seed = new ArrayList<String>();
+	List<String> cur_node = new ArrayList<String>();
+	//List<String> tree_order_list = new ArrayList<String>();
+
+	public List<String> createLevel(List<String> cur_node , List<String> seed){
+		List<String> new_node = new ArrayList<String>() ; // new level's node list
+		for(String node : cur_node) {
+			int is_seed = 0 ;	
+			for(String sd : seed){
+				// S_STEP
+				boolean[] result = s_step(getHash(node) , getHash(sd)) ;
+				String newnode = node+"->"+sd ;
+				// put hash	
+				addHash( newnode , result) ;
+				addValue( newnode , sumArray(result) ) ;
+				// put into display tree
+				insertDispTree(node , newnode) ;
+
+				// maxTrans & set condition
+				if((newnode.split("->")).length < maxTransSize && sumArray(result) >= T )
+					new_node.add(newnode) ;
+				
+				// I_STEP , preprocessing
+				String[] i_string = node.split("->") ;
+				String i_string_part = i_string[i_string.length-1] ;
+				String[] i_element = i_string_part.split(":") ;
+				String i_string_ele = i_element[i_element.length-1] ;
+				if(i_string_part.indexOf(sd) == -1 && seed.indexOf(i_string_ele) < seed.indexOf(sd) ){
+					result = i_step( getHash(node) , getHash(sd)) ;
+					newnode = node+":"+sd ;
+					// put hash
+					addHash(newnode,result) ;
+					addValue( newnode , sumArray(result) ) ;
+					// put into display tree
+					insertDispTree(node , newnode) ;
+					// set condition
+					if( sumArray(result) >= T) 
+						new_node.add(newnode) ;
+				}
+
+				if( sd.equals(node) )
+					is_seed = 1 ;
+			}
+			//remove 3 hash table
+			// if node not in seed
+			if( is_seed == 0 ){
+				removeHash(node) ;
+				removeValue(node) ;
+				removePos(node) ;
+			}
+		}
+		return new_node ;
+	}
+
+	public void insertDispTree(String par , String s){
+		Position p = null ;
+		// retri from pos hash
+		if(par.equals("root")){
+			p = tree.root() ;
+		}else{
+			p = getPos(par) ;
+		}
+
+		Position newp = tree.insertLastChild(p , s+" "+Integer.toString((getValue(s)).intValue())) ;
+
+		// pos hash
+		addPos(s,newp) ;
+	}
+
+	public void buildTree() {
+		List<String> cur_node = new ArrayList<String>() ;
+		for(String s : seed){
+			cur_node.add(s) ;
+			addValue( s , sumArray(getHash(s)) ) ;
+			// tree initial
+			insertDispTree("root" , s) ;
+		} 
+
+		// creat level 
+		int level = 1 ;
+		while( !cur_node.isEmpty() ){
+			System.err.println("\t"+cur_node.size()) ;
+			 long start , duration ;
+			 start = System.nanoTime() ;
+			cur_node = createLevel(cur_node , seed) ;
+			 duration = System.nanoTime() - start ;
+		 	 System.err.println( "\tlevel "+level+":"+ duration/1e+9 + " sec");
+			level++ ;
+		}
+		
+	}
+	public void setT(int t){
+		T = t ;
+	}
+
+	public void setPowk(int k){
+		powk = k ;
+	}
+	public void setMaxTransSize(int c){
+		maxTransSize = c;
+	}
+	
+	public void setCluster(int c){
+		cluster = c ;
+	}
+/*
+	public void addOrderList(String key , int[] value , int level){
+		String tap = "" ;
+		for(int i=0 ; i<level ; i++)
+			tap+="\t" ;
+		
+		tree_order_list.add(tap + key+"\t"+Arrays.toString(value)+" "+sumArray(value)) ;
+	}
+*/
+	public void removeHash(String key) {
+		hash.remove(key) ;
+	}
+	public void removeValue(String key){
+		hash_value.remove(key) ;
+	}
+	public void removePos(String key){
+		hash_pos.remove(key) ;
+	}
+
+	public void addHash(String key){
+		boolean[] array = new boolean[powk*cluster] ;
+		Arrays.fill(array, false) ;
+		hash.put(key , array) ;
+	}
+	public void addHash(String key, boolean[] array){
+		hash.put(key , array) ;
+	}
+	
+	public void addPos(String key, Position pos){
+		hash_pos.put(key,pos) ;
+	}
+	public void addValue(String key, int i){
+		hash_value.put(key , new Integer(i)) ;
+	}
+
+	public Integer getValue(String key){
+		return (Integer) hash_value.get(key) ;
+	}
+	public Position getPos(String key){
+		return (Position) hash_pos.get(key) ;
+	}
+	public boolean[] getHash(String key){
+		   return (boolean[]) hash.get(key) ;
+	}
+
+	public void printDispTree(){
+		System.out.println(tree.toString()) ;
+	}
+
+	public void printHash(){
+		Set s ;
+		s = hash.keySet() ;
+
+		Iterator<String> it = s.iterator();
+ 
+		while ( it.hasNext() == true )
+		{
+		   String key = it.next();
+		   System.out.print( key+"\t" );
+
+		   boolean[] t =(boolean[]) hash.get(key) ;
+
+		   for(int i=0 ; i<t.length ; i++){
+			if(i%powk == 0){
+				System.out.print("#") ;
+			}
+
+			System.out.format("%2d " , t[i]) ;
+		   }
+		   System.out.print("# Sum: ") ;
+		   System.out.print( sumArray(t) ) ;
+		   System.out.print("\n") ;
+		}
+
+	}
+/*
+	public void printOrderList(){
+		for(String s : tree_order_list ){
+			System.out.println(s) ;
+		}
+	}	
+*/
+	public void printArray(int[] array){
+
+		for(int i=0 ; i<array.length ; i++){
+			System.out.print(array[i]+" ") ;
+		}
+		System.out.print("\n") ;
+	}
+
+	public boolean hasKeyHash(String s){
+		return hash.containsKey(s) ;
+	}
+
+	public boolean[] s_step_process(boolean[] data){
+		boolean[] answer = new boolean[powk*cluster] ;
+
+		for(int base=0 ; base<powk*cluster ; base+=powk) {
+			boolean flag=false;
+			for(int offset=0 ; offset<powk ; offset++){
+				int index = base+offset ;
+				if(flag){
+					answer[index] = true ;	
+				}else{ //flag==0
+					if(data[index] == true){
+						flag=true ;
+					}
+					answer[index] = false ;
+				} 
+			}	
+		}
+		return answer ;
+	}
+
+	public boolean[] s_step(boolean[] from , boolean[] to){
+		// s_process
+		boolean[] answer = s_step_process(from) ;
+
+		// AND array
+		for(int i=0 ; i<answer.length ; i++)
+			//answer[i] = answer[i] & to[i] ;
+			answer[i] = answer[i] ;
+
+		return answer ;
+	} 
+	public boolean[] i_step(boolean[] from , boolean[] to){
+		boolean[] answer = new boolean[powk*cluster] ;
+		// and array
+		for(int i=0 ; i<from.length ; i++){
+			answer[i] = from[i] & to[i] ;
+		}
+		return answer ;
+	} 
+
+	public int sumArray(boolean[] array){
+		int sum=0 ;
+		for(int i=0 ; i<array.length ; i++){
+			if(array[i])
+				sum+=1;
+		}
+
+		return sum ;
+	}
+
+	public void setParameter(String input) {
+	try{
+		BufferedReader in = new BufferedReader(new FileReader(input));
+		String s = null ;
+		int max_cluster_size=0 ;
+		int total_cluster=0 ;
+		
+		int pre_id=-1 ;
+		int cluster_size=0 ;
+		while( (s=in.readLine())!= null ){
+			String[] com = s.split("\t") ;
+			
+			int cluster_id = Integer.valueOf(com[0]);
+			// new cluster
+			if(cluster_id != pre_id){
+				if(cluster_size>max_cluster_size)
+					max_cluster_size = cluster_size ;
+				cluster_size=0 ;
+				
+				total_cluster++ ;
+			}
+
+			pre_id = cluster_id ;
+			cluster_size++ ;
+		}
+		if(cluster_size>max_cluster_size)
+			max_cluster_size = cluster_size ;
+
+		// compute k
+		double k = (int)Math.ceil(Math.log(max_cluster_size)/Math.log(2)) ;
+
+		// set Parameter
+ 		setCluster(total_cluster) ;
+		setMaxTransSize(max_cluster_size) ;
+		setPowk((int)Math.pow(2,k)) ;	
+	}catch(IOException e){
+		e.printStackTrace() ;
+	}
+
+
+	}
+
+	public SPAM_v2(String input){
+		// default values
+		setParameter(input) ;
+		System.out.println("powk=" +powk + " cluster=" + cluster + " maxTransize=" + maxTransSize) ;
+		// reading data
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(input));
+
+			String s = null ;
+			int offset = 0 ; // offset for each cluster
+			int pre_id = -1 ; 
+			while( (s = in.readLine()) != null ){
+				String[] component = s.split("\t") ;
+				
+				int cluster_id = Integer.valueOf(component[0]);
+				String data = component[2] ;
+
+				if(cluster_id != pre_id){ // new cluster
+					offset=0 ;
+				}
+				int index = cluster_id*(this.powk) + offset ;
+
+				// insert bitmap	
+				String[] point = data.split(",") ;
+				
+				for(int i=0 ; i<point.length ; i++){
+					if(!hasKeyHash(point[i])){
+						addHash(point[i]) ;
+						seed.add(point[i]) ;				
+					}
+					boolean[] array = getHash(point[i]) ;
+					array[index]=true; 
+				}
+				offset++ ;	
+				pre_id = cluster_id ;
+			}
+		}catch(IOException e){
+			e.printStackTrace() ;
+		}
+	}
+
+	public static void main(String[] args){
+		// Deal with arguments
+		String input_file=null ;
+		int T = 0 ;
+		for(int i=0 ; i<args.length ; i++){
+			if( "-i".equals(args[i]) )
+				input_file = args[++i] ;
+			if( "-t".equals(args[i]) )
+				T=Integer.valueOf(args[++i]) ;
+		}
+
+		// initial input
+		long start , duration ;
+
+		 start = System.nanoTime();
+		SPAM_v2 spam = new SPAM_v2(input_file) ;
+		 duration = System.nanoTime() - start ;
+		 System.err.println( "Build Map: "+ duration/1e+9 + " sec");
+
+		spam.setT(T) ;
+
+		 start = System.nanoTime();
+		spam.buildTree() ;
+		 duration = System.nanoTime() - start ;
+		 System.err.println( "Build Tree: "+ duration/1e+9 + " sec");
+		
+		spam.printDispTree() ;
+
+		//pause
+		try{
+			System.err.println("finished.") ;
+			System.in.read();
+		}catch(Exception e){};
+	}		
+}

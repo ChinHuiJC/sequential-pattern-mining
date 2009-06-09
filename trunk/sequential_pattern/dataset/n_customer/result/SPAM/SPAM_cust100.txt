@@ -1,0 +1,55 @@
+---------------1бу10---------------
+memory: 18335
+One round takes 13.741 seconds.
+---------------3бу12---------------
+memory: 20063
+One round takes 16.140 seconds.
+---------------5бу14---------------
+memory: 23545
+One round takes 19.348 seconds.
+---------------7бу16---------------
+memory: 24456
+One round takes 19.779 seconds.
+---------------9бу18---------------
+memory: 28807
+One round takes 22.830 seconds.
+---------------11бу20---------------
+memory: 29516
+One round takes 21.705 seconds.
+---------------13бу22---------------
+memory: 29034
+One round takes 23.042 seconds.
+---------------15бу24---------------
+memory: 24202
+One round takes 16.946 seconds.
+---------------17бу26---------------
+memory: 27508
+One round takes 17.535 seconds.
+---------------19бу28---------------
+memory: 36423
+One round takes 25.174 seconds.
+---------------21бу30---------------
+memory: 40333
+One round takes 28.662 seconds.
+---------------23бу32---------------
+memory: 42813
+One round takes 32.206 seconds.
+---------------25бу34---------------
+memory: 40349
+One round takes 30.152 seconds.
+---------------27бу36---------------
+memory: 37519
+One round takes 28.981 seconds.
+---------------29бу38---------------
+memory: 32758
+One round takes 21.085 seconds.
+---------------31бу40---------------
+memory: 35797
+One round takes 21.212 seconds.
+---------------------------------------------------------
+Final SPAM's time and memory info-------------------------
+
+total_time: 358.539 seconds.
+biggest memory: 42813
+biggest mem_int: 26845
+biggest mem_bool: 127748

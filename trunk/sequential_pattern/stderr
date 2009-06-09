@@ -1,0 +1,23 @@
+Build Map: 0.026778716 sec
+	5
+	level 1:0.002787839 sec
+	35
+	level 2:0.037275121 sec
+	110
+	level 3:0.098035071 sec
+	205
+	level 4:0.107389569 sec
+	251
+	level 5:0.15160462 sec
+	210
+	level 6:0.094728023 sec
+	120
+	level 7:0.040736944 sec
+	45
+	level 8:0.014687676 sec
+	10
+	level 9:0.003086222 sec
+	1
+	level 10:3.155E-4 sec
+Build Tree: 0.552519756 sec
+finished.

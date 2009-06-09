@@ -1,0 +1,12 @@
+no_customer : 100 250 500 750 1000 1500 2000 2500
+
+CusTimeDistributin.exe seq -ncust XXXX -slen 12 -tlen 1.05 -nitems 1 -seq.npats 100 -seq.patlen 2.2 -ascii
+
+support: 0.02
+
+PSP-------------
+2500:
+
+GSP-------------
+100:
+

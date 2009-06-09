@@ -1,0 +1,12 @@
+max_gap : 6 8 10 12 14 16 18 20
+
+gen.exe seq -ncust 0.5 -slen 12 -tlen 1.05 -nitems 1 -seq.npats 200 -seq.patlen 2 -ascii
+
+support: 0.02
+
+PSP-------------
+2500:
+
+GSP-------------
+100:
+

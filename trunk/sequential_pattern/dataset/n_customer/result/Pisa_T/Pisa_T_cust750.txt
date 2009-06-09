@@ -1,0 +1,39 @@
+---------------1бу10---------------
+One round takes 3.005 seconds.
+---------------3бу12---------------
+One round takes 6.598 seconds.
+---------------5бу14---------------
+One round takes 1.782 seconds.
+---------------7бу16---------------
+One round takes 1.751 seconds.
+---------------9бу18---------------
+One round takes 1.248 seconds.
+---------------11бу20---------------
+One round takes 2.320 seconds.
+---------------13бу22---------------
+One round takes 2.116 seconds.
+---------------15бу24---------------
+One round takes 1.804 seconds.
+---------------17бу26---------------
+One round takes 1.107 seconds.
+---------------19бу28---------------
+One round takes 1.728 seconds.
+---------------21бу30---------------
+One round takes 4.992 seconds.
+---------------23бу32---------------
+One round takes 3.911 seconds.
+---------------25бу34---------------
+One round takes 1.248 seconds.
+---------------27бу36---------------
+One round takes 0.965 seconds.
+---------------29бу38---------------
+One round takes 0.805 seconds.
+---------------31бу40---------------
+One round takes 1.009 seconds.
+---------------------------------------------------------
+Final Pisa_T's time and memory info----------------------
+
+total_time: 36.388 seconds.
+biggest memory: 369710
+mem_node: 295657
+mem_seq: 148106
